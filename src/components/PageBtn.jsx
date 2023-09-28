@@ -10,9 +10,11 @@ function PageBtn() {
       title: "질문 생성",
       path: "/",
     },
+    {
+      title: "생성된 질문",
+      path: "/list",
+    },
   ];
-
-  console.log(path);
 
   return (
     <Wrapper>
@@ -35,6 +37,7 @@ export default PageBtn;
 
 const Wrapper = styled.div`
   width: 20%;
+  height: 500px;
   display: flex;
   align-items: center;
   flex-direction: column;

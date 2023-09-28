@@ -1,8 +1,13 @@
-import { Admin } from "./components/Admin";
 import { Router } from "./router/router";
+import GlobalStyle from "./styles/GlobalStyle";
 
 function App() {
-  return <Router />;
+  return (
+    <>
+      <GlobalStyle />
+      <Router />
+    </>
+  );
 }
 
 export default App;

@@ -22,7 +22,6 @@ export const Post = ({ Q, P, C }) => {
       </Question>
       <Buttons>
         <Button Text='찬성' />
-        <Button Text='반대' />
         <Button
           Text={<img src='/imgs/Comment.svg' width='20' height='20' />}
           Click={Comment}

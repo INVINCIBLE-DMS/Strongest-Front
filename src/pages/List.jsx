@@ -16,4 +16,5 @@ export default List;
 
 const Body = styled.div`
   display: flex;
+  margin-top: 20px;
 `;

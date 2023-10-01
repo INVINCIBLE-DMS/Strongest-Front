@@ -1,9 +1,8 @@
 import axios from "axios";
 
 export const instance = axios.create({
-  baseURL: "",
-  timeout: "3000",
+  baseURL: "http://3.37.11.107:8080",
   headers: {
-    Authorization: ""
+    Authorization: `Bearer ${localStorage.getItem('token')}`
   }
 })

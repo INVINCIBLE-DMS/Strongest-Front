@@ -1,12 +1,22 @@
 import { styled } from "styled-components";
 import { Post } from "./Post";
+import { useEffect, useState } from "react";
+import { getPosts } from "../apis/getPosts";
 
 export const Admin = () => {
+  const [posts, setPosts] = useState([]);
+  
+  useEffect(() => {
+    getPosts().then(res => setPosts(res.data));
+  }, [])
+
   return (
     <Wrapper>
-      <Post Q='질문 1' P='성향 1' C={["댓글1", "댓글2"]} />
-      <Post Q='질문 2' P='성향 2' C={["댓글댓글1", "댓글댓글2"]} />
-      <Post Q='질문 3' P='성향 3' C={["댓글댓글댓글1", "댓글댓글댓글2"]} />
+      {
+        posts.map((post, index) => {
+          return <Post key={index} Q={post.content} P={post.surveyType} I={index+1} A={post.agreeCnt} />
+        })
+      }
     </Wrapper>
   );
 };

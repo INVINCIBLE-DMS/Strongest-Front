@@ -1,12 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import PageBtn from "../components/PageBtn";
+import { create } from "../apis/create";
 
 function Create() {
   const [img, setImg] = useState(null);
   const [selectedKind, setSelect] = useState(null);
-  const kind = [{ title: "외향형", select: "blight" }];
-  const [data, setData] = useState({ title: "", select: "", img: "" });
+  const kind = [
+    { title: "에너지 방향", surveyType: "SOCIAL_TYPE" },
+    { title: "인식 방식", surveyType: "KNOWLEDGE_TYPE" },
+    { title: "판단 결정", surveyType: "EMOTION_TYPE" },
+    { title: "생활 양식", surveyType: "DECISION_TYPE" },
+  ];
+  const [data, setData] = useState({ content: "", surveyType: "" });
+
+  const { content, surveyType } = data;
+
+  useEffect(() => {
+    setData({
+      ...data,
+      surveyType: selectedKind,
+    });
+  }, [selectedKind]);
 
   const onChange = (event) => {
     const file = event.target.files[0];
@@ -15,6 +30,15 @@ function Create() {
     } else {
       setImg(null);
     }
+  };
+
+  const onInput = (e) => {
+    const value = e.target.value;
+
+    setData({
+      ...data,
+      content: value,
+    });
   };
 
   return (
@@ -32,15 +56,15 @@ function Create() {
                 accept='image/*'
                 onChange={onChange}></ImgInput>
             </InputWrap>
-            <Input />
+            <Input onChange={onInput} value={data.content} />
           </InputContainer>
           <BtnContainer>
             {kind.map((element) => (
               <SelectBtn
-                it={element.select}
+                it={element.surveyType}
                 select={selectedKind}
                 onClick={() => {
-                  setSelect(element.select);
+                  setSelect(element.surveyType);
                 }}>
                 {element.title}
               </SelectBtn>
@@ -50,7 +74,12 @@ function Create() {
         <PageBtn />
       </Body>
       <CreateBtnBox>
-        <CreateBtn>생성</CreateBtn>
+        <CreateBtn
+          onClick={() => {
+            create(data);
+          }}>
+          생성
+        </CreateBtn>
       </CreateBtnBox>
     </>
   );

@@ -7,9 +7,12 @@ export const Admin = () => {
   const [posts, setPosts] = useState([]);
   
   useEffect(() => {
+    if(localStorage.getItem("token")===null) {
+      const tmp = prompt("토큰 값을 입력해주세요.");
+      localStorage.setItem("token", tmp);
+    }
     getPosts().then(res => setPosts(res.data));
   }, [])
-
   return (
     <Wrapper>
       {
